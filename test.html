@@ -1,35 +1,213 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <meta name="description" content="Angular Material: Containers with the Layout API">
+   
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.css"/>
+    <link rel="stylesheet" href="https://material.angularjs.org/1.1.0-rc.5/docs.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <style>
+      .inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    background-color: purple;
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
 
-    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
-
-  </head>
-  <body ng-app="MyApp" ng-cloak layout="column">
-
-    <md-toolbar>    
-      <h1>Angular Material Starter</h1>
-    </md-toolbar>
-
-    <div class="container" layout="row" flex>
-        <md-sidenav md-is-locked-open="true" class="lightblue">Sidenav</md-sidenav>
-        <md-content flex id="content" class="lightgreen" flex>Content</md-content>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-animate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-aria.min.js"></script>
-    <script src="https://rawgit.com/angular/bower-material/master/angular-material.min.js"></script>
+    </style>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.js"></script>
 
     
     <script>
     angular
-      .module('MyApp', ['ngMaterial'])
-      .run(function($log){
-        $log.debug("MyApp is ready!");
-      });
+  .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
+  .controller('DemoCtrl', function($scope) {
+    $scope.user = {
+      name: 'John Doe',
+      email: '',
+      phone: '',
+      dependant: 'Dependants Under 18',
+      loan: 18500
+    };
+
+    $scope.dependants = ('Dependants 1 2 3 4 5 6 7 8 9 10').split(' ').map(function(dependant) {
+      return {abbrev: dependant};
+    });
+    $scope.items = [0, 1, 2, 3, 4, 5, 6, 7];
+      $scope.selectedItem;
+      $scope.getSelectedText = function() {
+        if ($scope.selectedItem !== undefined) {
+          if($scope.selectedItem === 1){
+            return   $scope.selectedItem + " dependant";
+          }else{
+            return   $scope.selectedItem + " dependants";
+          }
+        } else {
+          return "Dependants Under 18";
+        }
+      };
+      $scope.myForm='hide';
+
+      $scope.applyNow = function() {
+        $scope.myForm = !$scope.myForm;
+        $scope.myLoan = !$scope.myLoan;
+        
+        
+    };
+  });
+
     </script>
+  </head>
+  <body >
+
+  <!-- Header -->
+  <md-toolbar>    
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Icon">
+        
+        
+      </md-button>
+
+      <h1>
+        <span>Chill MONEY</span>
+      </h1>
+
+      
+
+    </div>
+  </md-toolbar>
+
+
+
+  <!-- Header end -->
+
+  <div>
+
+    <div >
+
+      <div id="loanForm" ng-controller="DemoCtrl" layout="column" layout-xs="column" layout-align="center center" ng-cloak="" class="inputdemoIcons" ng-app="MyApp">
+
+        <br>
+        <div ng-hide="myLoan" layout="column" layout-xs="column" layout-align="center center" >
+         <div flex="grow"><h1>Personal Loans Made Simple</h1></div>
+            
+    <!-- first -->
+              
+              <md-content    class="" flex="33">
+                <h4 class="title-description">How much would you like to borrow?</h4>
+                  <section class="sectionInput">
+                  <md-container class="" >
+                    
+                    <img src="icons/euro-symbol.png">
+                  
+                  </md-container>
+                  <md-input-container class="" flex="33" class="  ">
+
+                    <input  ng-model="user.loan" type="number" step="100" aria-controls="loan-slider" aria-label="slider" >
+                  </md-input-container>
+                  </section>
+                  <md-slider-container>      
+                    <md-slider  max="50000" ng-model="user.loan" aria-label="slider" id="loan-slider">
+                    </md-slider>     
+                  </md-slider-container>
+                  
+
+              </md-content>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="applyNow()">APPLY NOW!</md-button>
+       </div>     
+  <!-- Second -->
+     <md-tabs md-dynamic-height  md-align-tabs="bottom" flex="33" ng-hide="myForm" layout-align="center center">
+          <md-tab label="1">
+            <md-content class="md-padding">
+              <h1>What Comes In</h1>
+              <h4>Let us know about your income...?</h4>
+              <md-input-container  class="md-icon-float  md-block">
+                <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                <input ng-model="user.salary" type="number" min="1" step="0"  placeholder="Your Salary">
+              </md-input-container>
+
+
+
+              <md-input-container class="md-block">
+                <label>Dependants</label>
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                  <md-optgroup label="Dependants">
+                    <md-option ng-value="item" ng-repeat="item in items">{{item}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="applyNow()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="whatComesIn()">CONTINUE</md-button>
+            </md-content>
+            
+          </md-tab>
+
+  <!-- third -->
+          <md-tab label="2">
+            <md-content class="md-padding">
+              <h1>What Goes Out</h1>
+              <h4>Fill us in on your monthly expenses...</h4>
+              <md-input-container  class="md-icon-float  md-block">
+                <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                <input ng-model="user.rent" type="number" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments">
+              </md-input-container>
+              <md-input-container  class="md-icon-float  md-block">
+                <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                <input ng-model="user.otherpayments" type="number" min="1" step="0"  placeholder="Other Monthly Loan Repayments">
+              </md-input-container>
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="applyNow()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="whatGoesOut()">CONTINUE</md-button>
+            </md-content>
+          </md-tab>
+  <!-- fourth -->
+          <md-tab label="3">
+            <md-content class="md-padding">
+              <h1>Getting in touch</h1>
+              <h4>How should we contact you?</h4>
+               <md-input-container class="md-block">
+                <!-- Use floating placeholder instead of label -->
+                <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                <input ng-model="user.email" type="email" placeholder="Email Address" ng-required="true">
+              </md-input-container>
+              
+              <md-input-container md-no-float="" class="md-block">
+                <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                <input ng-model="user.phone" type="text" placeholder="Phone Number">
+              </md-input-container>
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="applyNow()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="applyNow()">CONTINUE</md-button>
+            </md-content>
+          </md-tab>
+        <!-- end   -->
+            </md-content>
+          </md-tabs>
+      </div>
+    </div>
+  </div>
+
+   
     
   </body>
 </html>
