@@ -5040,9 +5040,14 @@ md-input{
   border-bottom-left-radius: 5px;
 }
 md-input-container .md-input {
-color: #6e49aa;
-border-color: rgba(254,253,103,0.82);
-font-family: ChunkFiveRegular;
+
+}
+.md-chill-loan-input .md-input{
+  color: #442674;
+  border: none;
+  font-family: ChunkFiveRegular;
+  font-size: 48pt;
+  text-align: center;
 }
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     border-color: #c8c8c8;
