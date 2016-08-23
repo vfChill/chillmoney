@@ -4988,7 +4988,7 @@ dt {
 
 md-content {
     
-    background-color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0);
 }
 md-input-container{
   background-color: rgba(255,255,255,1);
@@ -4996,8 +4996,15 @@ md-input-container{
 
 
 /*CHILL MONEY*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 .layoutForm{
-      max-width: 400px;
+  max-width: 400px;
 }
 #loanForm h1
 {
@@ -5042,13 +5049,95 @@ md-input{
 md-input-container .md-input {
 
 }
+.md-chill-input .md-input{
+    color: #8f8f8f;
+    font-family: Helvetica Neue;
+    font-size: 18pt;
+    text-align: right;
+    height: 34px;
+    padding-top: 8px;
+    width: 100%;
+}
+.chill-input-container{
+      padding-left: 30px;
+    padding-right: 30px;
+    
+    background: white;
+    height: 76px;
+    margin: 18px 0px;
+    display: flex;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 .md-chill-loan-input .md-input{
   color: #442674;
   border: none;
   font-family: ChunkFiveRegular;
   font-size: 48pt;
   text-align: center;
+  height: 76px;
+  padding-top: 8px;
 }
+.md-chill-loan-input  label { 
+  position: absolute; 
+  background: white; 
+  left:0px; 
+  top: 0px; 
+  cursor: pointer; 
+  color: #442674;
+  border: none;
+  font-family: ChunkFiveRegular;
+  font-size: 48pt;
+  text-align: center; 
+}
+.md-chill-loan-input .md-errors-spacer {
+    display: none;
+}
+ .input-icon{
+    margin: 18px 0px;
+    height: 76px;
+    background: rgba(0,0,0,0.2);
+}
+.input-icon-left{
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+}
+.input-icon-right{
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.input-icon img{
+    vertical-align: middle;
+    margin-top: 18px;
+}
+.input-icon .md-button {
+    color: white;
+    width: 100%;
+    padding: 0px; 
+    margin: 0px;
+    min-width: 0px;
+    height: 37px;
+    font-size: 20pt;
+}
+.input-icon .underline{
+    border-bottom: #c8c8c8 1px solid;
+    width: 100%;
+    display: block;
+}
+md-input-container {     padding: 0px;  }
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     border-color: #c8c8c8;
 }

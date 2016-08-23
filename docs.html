@@ -114,17 +114,11 @@
   <!-- Header -->
   <md-toolbar>    
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" aria-label="Icon">
-        
-        
+      <md-button class="md-icon-button" aria-label="Icon">        
       </md-button>
-
       <h1>
         <span>Chill MONEY</span>
       </h1>
-
-      
-
     </div>
   </md-toolbar>
 
@@ -151,24 +145,27 @@
                     <h4 class="title-description">How much would you like to borrow?</h4>
                   </div>
                   <div flex="10">
-                    <img src="icons/euro-symbol.png">
+                    <div class="input-icon input-icon-left">
+                      <img src="icons/euro-symbol.png">
+                    </div>
                   </div>
                   <div flex="80">
-                     <section class="" >
-                    
-                    <md-input-container class="md-chill-loan-input" >
-
-                      <input  ng-model="user.loan" type="number" step="100" aria-controls="loan-slider" aria-label="slider" >
-                    </md-input-container>
-                    
-                  </section> 
+                    <section class="" >
+                      <md-input-container class="md-chill-loan-input" >
+                        <input id="userLoan" ng-model="user.loan" type="number" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
+                      </md-input-container>
+                    </section> 
                   </div>
                   <div flex="10">
-                    + -
+                    <div class="input-icon input-icon-right">
+                      <md-button ng-model="user.loan"  ng-click="user.loan = user.loan + 100">+</md-button>
+                      <span class="underline"> </span>
+                      <md-button ng-model="user.loan" ng-click="user.loan = user.loan - 100">-</md-button>
+                    </div>
                   </div>
-                  <div flex="100">
+                  <div flex="80"  flex-offset="10">
                     <md-slider-container>      
-                    <md-slider  max="50000" ng-model="user.loan" aria-label="slider" id="loan-slider">
+                    <md-slider  max="60000" ng-model="user.loan" aria-label="slider" step="100" id="loan-slider">
                     </md-slider>     
                   </md-slider-container>
                   </div>
@@ -188,25 +185,33 @@
                 <h4>Let us know about your income...?</h4>
               </div>                
               <div flex="10">
-                <img src="icons/euro-symbol.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/euro-symbol.png">
+                </div>
               </div>
               <div flex="90">
-                <md-input-container  class="md-icon-float  md-block">                  
-                  <input ng-model="user.salary" type="number" min="1" step="0"  placeholder="Your Salary">
-                </md-input-container>
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input md-block">                  
+                    <input ng-model="user.salary" type="number" min="1" step="0"  placeholder="Your Salary">
+                  </md-input-container>
+                </div>
               </div>
               <div flex="10">
-                <img src="icons/dependants.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/dependants.png">
+                </div>
               </div>
               <div flex="90">
-              <md-input-container class="md-block">
-                <label>Dependants</label>
-                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
-                  <md-optgroup label="Dependants">
-                    <md-option ng-value="item" ng-repeat="item in items">{{item}}</md-option>
-                  </md-optgroup>
-                </md-select>
-              </md-input-container>
+                <div class="chill-input-container">
+                  <md-input-container class="md-chill-input md-block">
+                    <label>Dependants</label>
+                    <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                      <md-optgroup label="Dependants">
+                        <md-option ng-value="item" ng-repeat="item in items">{{item}}</md-option>
+                      </md-optgroup>
+                    </md-select>
+                  </md-input-container>
+                </div>
               </div>
             </div>
 
@@ -227,20 +232,30 @@
                 <h4>Fill us in on your monthly expenses...</h4>
               </div>     
               <div flex="10">
-                <img src="icons/rent.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/rent.png">
+                </div>
+                
               </div>
               <div flex="90">
-                <md-input-container  class="md-icon-float  md-block">
-                  <input ng-model="user.rent" type="number" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments">
-                </md-input-container>
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input  md-block">
+                    <input ng-model="user.rent" type="number" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
+                  </md-input-container>
+                  </div>
               </div>
               <div flex="10">
-                <img src="icons/credit-card.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/credit-card.png">
+                </div>
+                
               </div>
               <div flex="90">
-                <md-input-container  class="md-icon-float  md-block">
-                  <input ng-model="user.otherpayments" type="number" min="1" step="0"  placeholder="Other Monthly Loan Repayments">
-                </md-input-container>
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input md-block">
+                    <input ng-model="user.otherpayments" type="number" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
+                  </md-input-container>
+                  </div>
               </div>
             </div>
               <md-button  class="md-chill-button md-chill-purple-button " ng-click="prevTab()">BACK</md-button>
@@ -258,22 +273,32 @@
                 <h4>How should we contact you?</h4>
               </div>   
               <div flex="10">
-                <img src="icons/email.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/email.png">
+                </div>
+                
               </div>
-              <div flex="90">              
-               <md-input-container class="md-block">
-                <!-- Use floating placeholder instead of label -->
-                <input ng-model="user.email" type="email" placeholder="Email Address" ng-required="true">
-               </md-input-container>
+              <div flex="90"> 
+                <div class="chill-input-container">             
+                 <md-input-container class="md-chill-input md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <input ng-model="user.email" type="email" placeholder="Email Address" ng-required="true">
+                 </md-input-container>
+               </div>
               </div>
               <div flex="10">
-                <img src="icons/number.png">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/number.png">
+                </div>
+                
+
               </div>
               <div flex="90">
-                <md-input-container md-no-float="" class="md-block">
-                  <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-                  <input ng-model="user.phone" type="text" placeholder="Phone Number">
-                </md-input-container>
+                <div class="chill-input-container">  
+                  <md-input-container  class="md-chill-input md-block">
+                    <input ng-model="user.phone" type="text" placeholder="Phone Number" ng-required="true">
+                  </md-input-container>
+                  </div>
                 </div>
               <md-button  class="md-chill-button md-chill-purple-button " ng-click="prevTab()">BACK</md-button>
               <md-button  class="md-chill-button md-chill-green-button " ng-click="getInTouch()">CONTINUE</md-button>
