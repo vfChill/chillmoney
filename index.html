@@ -1,83 +1,317 @@
 <!DOCTYPE html>
-<html lang="en-US">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-  
-  
-</head>
-<body>
+<html lang="en" >
+  <head>
+   
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.css"/>
+    <link rel="stylesheet" href="https://material.angularjs.org/1.1.0-rc.5/docs.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <style>
+      .inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    background-color: purple;
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
 
-	<div ng-app="myApp" ng-controller="myCtrl">
+    </style>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.js"></script>
 
-		 <input type="text" ng-model="likeBorrow"><br>
-		 <input type="text" ng-model="inSalary"><br>
-		 <input type="text" ng-model="inDependats"><br>
-		 <input type="text" ng-model="outRent"><br>
-		 <input type="text" ng-model="outOther"><br>
-		<br>
-		result: {{likeBorrow + ";" + inSalary + ";" + inDependats + ";" + outRent + ";" + outOther}}
+    
+    <script>
+    angular
+  .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
+  .controller('DemoCtrl', function($scope) {
+    $scope.user = {
+      name: 'John Doe',
+      email: '',
+      phone: '',
+      dependant: 'Dependants Under 18',
+      loan: 18500
+    };
 
-	</div>
-	----------------------------------------
-	<div ng-app="inputIconDemo" ng-controller="DemoCtrl" layout="column" layout-padding ng-cloak>
-	  <br/>
-	  <md-content class="md-no-momentum">
-	    <md-input-container class="md-icon-float md-block">
-	      <!-- Use floating label instead of placeholder -->
-	      <label>Name</label>
-	      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-	      <input ng-model="user.name" type="text">
-	    </md-input-container>
-	    <md-input-container md-no-float class="md-block">
-	      <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-	      <input ng-model="user.phone" type="text" placeholder="Phone Number">
-	    </md-input-container>
-	    <md-input-container class="md-block">
-	      <!-- Use floating placeholder instead of label -->
-	      <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-	      <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
-	    </md-input-container>
-	    <md-input-container md-no-float class="md-block">
-	      <input ng-model="user.address" type="text" placeholder="Address" >
-	      <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
-	    </md-input-container>
-	    <md-input-container class="md-icon-float md-icon-right md-block">
-	      <label>Donation Amount</label>
-	      <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
-	      <input ng-model="user.donation" type="number" step="0.01">
-	      <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
-	    </md-input-container>
-	  </md-content>
-	</div>
-	<!-- Angular.js Libraries -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-	<script>
-		var app = angular.module('myApp', []);
-		app.controller('myCtrl', function($scope) {
-		    $scope.likeBorrow= "18,500";
-		    
-		});
+    $scope.dependants = ('Dependants 1 2 3 4 5 6 7 8 9 10').split(' ').map(function(dependant) {
+      return {abbrev: dependant};
+    });
+    $scope.items = [0, 1, 2, 3, 4, 5, 6, 7];
+    $scope.selectedItem;
+    $scope.getSelectedText = function() {
+      if ($scope.selectedItem !== undefined) {
+        if($scope.selectedItem === 1){
+          return   $scope.selectedItem + " dependant";
+        }else{
+          return   $scope.selectedItem + " dependants";
+        }
+      } else {
+        return "Dependants Under 18";
+      }
+    };
+    $scope.myForm='hide';
 
-		angular
-		  .module('inputIconDemo', ['ngMaterial', 'ngMessages'])
-		  .controller('DemoCtrl', function($scope) {
-		    $scope.user = {
-		      name: 'John Doe',
-		      email: '',
-		      phone: '',
-		      address: 'Mountain View, CA',
-		      donation: 19.99
-		    };
-		  });
-	</script>
+    $scope.applyNow = function() {
+      $scope.myForm = !$scope.myForm;
+      $scope.myLoan = !$scope.myLoan;
+      console.log($scope.user);        
+    };
+
+    $scope.whatComesIn = function()
+    {
+      $scope.user.dependant = $scope.selectedItem;
+      console.log($scope.user); 
+      $scope.nextTab();
+    }
+    $scope.whatGoesOut = function()
+    {
+      console.log($scope.user); 
+      $scope.nextTab();
+    }
+    $scope.getInTouch = function () {
+      console.log($scope.user); 
+      // $scope.nextTab();
+    }
+
+    $scope.max = 2;
+    $scope.min = 0;
+    $scope.selectedTab = 0;
+    $scope.nextTab = function() {
+    var Tab = ($scope.selectedTab == $scope.max) ? 0 : $scope.selectedTab + 1;
+    $scope.selectedTab = Tab;
+    };
+
+    $scope.prevTab = function() {
+    var Tab = ($scope.selectedTab == $scope.min) ? 0 : $scope.selectedTab - 1;
+    $scope.selectedTab = Tab;
+    };
+
+  });
+
+    </script>
+  </head>
+  <body >
+
+  <!-- Header -->
+  <md-toolbar>    
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Icon">        
+      </md-button>
+      <h1>
+        <span>Chill MONEY</span>
+      </h1>
+    </div>
+  </md-toolbar>
 
 
-</body>
+
+  <!-- Header end -->
+
+  <div>
+
+    <div >
+
+      <div id="loanForm" ng-controller="DemoCtrl" layout="column" layout-xs="column" layout-align="center center" ng-cloak="" class="inputdemoIcons" ng-app="MyApp">
+
+        <br>
+        <div ng-hide="myLoan" layout="column" layout-xs="column" layout-align="center center" >
+         <div flex="grow"><h1>Personal Loans Made Simple</h1></div>
+         
+            
+    <!-- first -->
+              
+              <md-content    class="" >
+                <div layout="row" class="layoutForm" layout-wrap flex="33">
+                  <div flex="100">
+                    <h4 class="title-description">How much would you like to borrow?</h4>
+                  </div>
+                  <div flex="10">
+                    <div class="input-icon input-icon-left">
+                      <img src="icons/euro-symbol.png">
+                    </div>
+                  </div>
+                  <div flex="80">
+                    <section class="" >
+                      <md-input-container class="md-chill-loan-input" >
+                        <input id="userLoan" ng-model="user.loan" type="number" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
+                      </md-input-container>
+                    </section> 
+                  </div>
+                  <div flex="10">
+                    <div class="input-icon input-icon-right">
+                      <md-button ng-model="user.loan"  ng-click="user.loan = user.loan + 100">+</md-button>
+                      <span class="underline"> </span>
+                      <md-button ng-model="user.loan" ng-click="user.loan = user.loan - 100">-</md-button>
+                    </div>
+                  </div>
+                  <div flex="80"  flex-offset="10">
+                    <md-slider-container>      
+                    <md-slider  max="60000" ng-model="user.loan" aria-label="slider" step="100" id="loan-slider">
+                    </md-slider>     
+                  </md-slider-container>
+                  </div>
+                </div>    
+              </md-content>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="applyNow()">APPLY NOW!</md-button>
+       </div>     
+  <!-- Second -->
+     <md-tabs md-dynamic-height md-selected="selectedTab"  md-align-tabs="bottom" flex="33" ng-hide="myForm" layout-align="center center">
+          <md-tab label="1" ng-hide>
+            <md-content class="md-padding">
+            <div layout="row" class="layoutForm" layout-wrap flex="33">
+              <div flex="100">
+                <h1>What Comes In</h1>
+              </div>
+              <div flex="100">
+                <h4>Let us know about your income...?</h4>
+              </div>                
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/euro-symbol.png">
+                </div>
+              </div>
+              <div flex="90">
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input md-block">                  
+                    <input ng-model="user.salary" type="number" min="1" step="0"  placeholder="Your Salary">
+                  </md-input-container>
+                </div>
+              </div>
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/dependants.png">
+                </div>
+              </div>
+              <div flex="90">
+                <div class="chill-input-container">
+                  <md-input-container class="md-chill-input md-block">
+                    <label>Dependants</label>
+                    <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                      <md-optgroup label="Dependants">
+                        <md-option ng-value="item" ng-repeat="item in items">{{item}}</md-option>
+                      </md-optgroup>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="applyNow()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="whatComesIn()">CONTINUE</md-button>
+            </md-content>
+            
+          </md-tab>
+
+  <!-- third -->
+          <md-tab label="2" ng-hide>
+            <md-content class="md-padding">
+             <div layout="row" class="layoutForm" layout-wrap flex="33">
+              <div flex="100">
+                <h1>What Goes Out</h1>
+              </div>
+              <div flex="100">
+                <h4>Fill us in on your monthly expenses...</h4>
+              </div>     
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/rent.png">
+                </div>
+                
+              </div>
+              <div flex="90">
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input  md-block">
+                    <input ng-model="user.rent" type="number" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
+                  </md-input-container>
+                  </div>
+              </div>
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/credit-card.png">
+                </div>
+                
+              </div>
+              <div flex="90">
+                <div class="chill-input-container">
+                  <md-input-container  class="md-chill-input md-block">
+                    <input ng-model="user.otherpayments" type="number" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
+                  </md-input-container>
+                  </div>
+              </div>
+            </div>
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="prevTab()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="whatGoesOut()">CONTINUE</md-button>
+            </md-content>
+          </md-tab>
+  <!-- fourth -->
+          <md-tab label="3" ng-hide>
+            <md-content class="md-padding">
+            <div layout="row" class="layoutForm" layout-wrap flex="33">
+             <div flex="100">
+                <h1>Getting in touch</h1>
+              </div>
+              <div flex="100">
+                <h4>How should we contact you?</h4>
+              </div>   
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/email.png">
+                </div>
+                
+              </div>
+              <div flex="90"> 
+                <div class="chill-input-container">             
+                 <md-input-container class="md-chill-input md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <input ng-model="user.email" type="email" placeholder="Email Address" ng-required="true">
+                 </md-input-container>
+               </div>
+              </div>
+              <div flex="10">
+                <div class="input-icon input-icon-left">
+                  <img src="icons/number.png">
+                </div>
+                
+
+              </div>
+              <div flex="90">
+                <div class="chill-input-container">  
+                  <md-input-container  class="md-chill-input md-block">
+                    <input ng-model="user.phone" type="text" placeholder="Phone Number" ng-required="true">
+                  </md-input-container>
+                  </div>
+                </div>
+              <md-button  class="md-chill-button md-chill-purple-button " ng-click="prevTab()">BACK</md-button>
+              <md-button  class="md-chill-button md-chill-green-button " ng-click="getInTouch()">CONTINUE</md-button>
+            </md-content>
+          </md-tab>
+        <!-- end   -->
+            </md-content>
+          </md-tabs>
+      </div>
+    </div>
+  </div>
+
+   
+    
+  </body>
 </html>
