@@ -41,11 +41,11 @@
 
     
     <script>
-    angular
+    var chillModule =angular
   .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
   .controller('DemoCtrl', function($scope, $mdDialog) {
     $scope.user = {
-      name: 'John Doe',
+      name: 'chill qq',
       email: '',
       phone: '',
       dependant: 'Dependants Under 18',
@@ -98,17 +98,17 @@
       return (dependants*140);
     }
     $scope.totalIncome = function(user){
-      return user["salary"] + user["childBenefit"];
+      return $scope.parseIntBase10(user.salary) + $scope.parseIntBase10(user.childBenefit);      
     }
 
     // Expenditure
     $scope.livingExpenses = function(user){
       var individual = 1400;
       var child = 250;
-      return individual + (child*user["dependant"]);
+      return individual + (child*user.dependant);
     }
     $scope.repayments = function(user){
-      return (user["rent"] + user["otherpayments"]);
+      return ($scope.parseIntBase10(user.rent) + $scope.parseIntBase10(user.otherpayments));
     }
 
     // Net Disposable Income 
@@ -124,7 +124,7 @@
       // console.log("decimal rate:" + decimalRate);
       // console.log("months:" + months);
 
-      return ( decimalRate + (decimalRate / ( Math.pow((1+decimalRate), months) -1)) ) * user.loan;
+      return ( decimalRate + (decimalRate / ( Math.pow((1+decimalRate), months) -1)) ) * $scope.parseIntBase10(user.loan);
     }
 
     $scope.applyNow = function() {
@@ -169,6 +169,11 @@
       console.log("Monthly Repayment: " + $scope.user.monthlyPayment);
       console.log("Total Income: €" + $scope.user.totalIncome);
       console.log($scope.user.NDI);
+      if($scope.user.monthlyPayment >= $scope.user.NDI){
+          $scope.imagePath = 'images/sadface.gif';
+      }else{
+          $scope.imagePath = 'images/success.png';
+      }
       $scope.myForm = !$scope.myForm;
       $scope.successApp = !$scope.successApp;
       
@@ -183,6 +188,9 @@
     var Tab = ($scope.selectedTab == $scope.max) ? 0 : $scope.selectedTab + 1;
     $scope.selectedTab = Tab;
     };
+    $scope.parseIntBase10 = function(text){
+      return parseInt(text,10);
+    }
 
     $scope.prevTab = function() {
     var Tab = ($scope.selectedTab == $scope.min) ? 0 : $scope.selectedTab - 1;
@@ -205,7 +213,7 @@
         .targetEvent(ev)
     );};
 
-    $scope.imagePath = 'images/success.png';
+    
 
 
   }).config(function($mdThemingProvider) {
@@ -214,6 +222,27 @@
     $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
     $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
 });
+  chillModule.$inject = ['$scope'];
+  chillModule.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
 
     </script>
   </head>
@@ -261,7 +290,7 @@
                   <div flex="80">
                     <section class="" >
                       <md-input-container class="md-chill-loan-input" >
-                        <input id="userLoan"  ng-model="user.loan"  type="number" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
+                        <input id="userLoan"  ng-model="user.loan" format="number"  type="text" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
                       </md-input-container>
                     </section> 
                   </div>
@@ -301,7 +330,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input md-block">                  
-                    <input required name="salary"  ng-model="user.salary" type="number" min="1" step="0"  placeholder="Your Salary">
+                    <input required name="salary"  ng-model="user.salary" format="number"  type="text" min="1" step="0"  placeholder="Your Salary">
                      <div ng-messages="elsaForm.salary.$error">
                       <div ng-message="required">Your salary is required.</div>
                     </div>
@@ -355,7 +384,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input  md-block">
-                    <input ng-model="user.rent" type="number" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
+                    <input ng-model="user.rent" format="number"  type="text" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
                   </md-input-container>
                   </div>
               </div>
@@ -368,7 +397,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input md-block">
-                    <input ng-model="user.otherpayments" type="number" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
+                    <input ng-model="user.otherpayments" format="number"  type="text" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
                   </md-input-container>
                   </div>
               </div>
@@ -430,7 +459,7 @@
                 <md-card-content layout="column" layout-align="space-between">
                   
                   <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-                  <md-card-actions layout="row" layout-align="space-between cente">
+                  <!-- <md-card-actions layout="row" layout-align="space-between cente">
                     <md-button class="md-icon-button" aria-label="Favorite">
                       <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
                     </md-button>
@@ -440,18 +469,18 @@
                     <md-button class="md-icon-button" aria-label="Share">
                       <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
                     </md-button>
-                  </md-card-actions>
+                  </md-card-actions> -->
                 </md-card-content>
                 <md-card-title>
                   <md-card-title-text>                                       
-                    <md-divider ng-if="!$last"></md-divider>
+                    <!-- <md-divider ng-if="!$last"></md-divider> -->
                
                     <span class="md-subhead">Loan requested</span>
                     <span class="md-headline">{{user.loan | currency:'€' }}</span>
 
                     <md-divider ng-if="!$last"></md-divider>                   
                                 
-                    <span class="md-subhead">Max Term Allowed (months)</span>
+                    <span class="md-subhead">Term (months)</span>
                     <span class="md-headline">{{user.maxTerm * 12 }}</span>
 
                     <md-divider ng-if="!$last"></md-divider>
@@ -459,10 +488,10 @@
                     <span class="md-subhead">Monthly Repayment</span>
                     <span class="md-headline">{{user.monthlyPayment | currency:'€' }}</span>
                     
-                    <md-divider ng-if="!$last"></md-divider>
+                    <!-- <md-divider ng-if="!$last"></md-divider>
                     
                     <span class="md-subhead">Available Income</span>
-                    <span class="md-headline">{{user.NDI | currency:'€' }}</span>
+                    <span class="md-headline">{{user.NDI | currency:'€' }}</span> -->
                   
                
              

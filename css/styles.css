@@ -5194,7 +5194,7 @@ md-slider.md-default-theme ._md-thumb:after, md-slider ._md-thumb:after {
 }
 .md-toolbar-tools {
       height: 200px;
-      max-height: 170px;
+      /*max-height: 170px;*/
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
     background-color: rgba(63,81,181,0);
