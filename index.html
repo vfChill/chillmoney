@@ -115,6 +115,18 @@
     $scope.netDisposableIncome = function(user){
       return (user.totalIncome - (user.livingExpenses + user.repayments));
     }
+
+    // Monthly Repayment
+    $scope.monthlyPayment = function(user){
+      var decimalRate = ((user.rate / 100)/12);
+      var months = (user.maxTerm * 12);
+
+      // console.log("decimal rate:" + decimalRate);
+      // console.log("months:" + months);
+
+      return ( decimalRate + (decimalRate / ( Math.pow((1+decimalRate), months) -1)) ) * user.loan;
+    }
+
     $scope.applyNow = function() {
       if($scope.user.loan < 1500 || $scope.user.loan > 60000){
 
@@ -144,6 +156,7 @@
       $scope.user.livingExpenses = $scope.livingExpenses($scope.user);
       $scope.user.repayments = $scope.repayments($scope.user);
       $scope.user.NDI = $scope.netDisposableIncome($scope.user);
+      $scope.user.monthlyPayment = $scope.monthlyPayment($scope.user);
       console.log($scope.user); 
       $scope.nextTab();
     };
@@ -152,7 +165,8 @@
       
 
       console.log("Loan requested: €" + $scope.user.loan);
-      console.log("Max Term Allowed (months)" + ($scope.user.maxTerm * 12 ));
+      console.log("Max Term Allowed (months): " + ($scope.user.maxTerm * 12 ));
+      console.log("Monthly Repayment: " + $scope.user.monthlyPayment);
       console.log("Total Income: €" + $scope.user.totalIncome);
       console.log($scope.user.NDI);
       $scope.myForm = !$scope.myForm;
@@ -191,7 +205,15 @@
         .targetEvent(ev)
     );};
 
-  });
+    $scope.imagePath = 'images/success.png';
+
+
+  }).config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
+    $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
+    $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
+    $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+});
 
     </script>
   </head>
@@ -401,48 +423,54 @@
           <!-- SUCCESS -->
           <div ng-hide="successApp" layout="column" layout-xs="column" layout-align="center center" >
             <div flex="100" layout-align="center center">
-              <div class="">
-                <img width="312" height="392" src="images/success.png">
-              </div>
-            </div>  
-            <md-toolbar class="md-theme-light">
-              <h2 class="md-toolbar-tools">
-                <span>Results (just for development purpuse)</span>
-              </h2>
-            </md-toolbar>
-            <md-content style="background: white">
 
-              <md-list>
-                <md-list-item class="md-3-line" >
-                  <div class="md-list-item-text">
-                    <h3>Loan requested</h3>
-                    <h5>{{user.loan | currency:'€' }}</h5>
+              <md-card md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
+                
+                
+                <md-card-content layout="column" layout-align="space-between">
+                  
+                  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                  <md-card-actions layout="row" layout-align="space-between cente">
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                      <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Settings">
+                      <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                      <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+                    </md-button>
+                  </md-card-actions>
+                </md-card-content>
+                <md-card-title>
+                  <md-card-title-text>                                       
+                    <md-divider ng-if="!$last"></md-divider>
+               
+                    <span class="md-subhead">Loan requested</span>
+                    <span class="md-headline">{{user.loan | currency:'€' }}</span>
+
+                    <md-divider ng-if="!$last"></md-divider>                   
+                                
+                    <span class="md-subhead">Max Term Allowed (months)</span>
+                    <span class="md-headline">{{user.maxTerm * 12 }}</span>
+
+                    <md-divider ng-if="!$last"></md-divider>
+                 
+                    <span class="md-subhead">Monthly Repayment</span>
+                    <span class="md-headline">{{user.monthlyPayment | currency:'€' }}</span>
                     
-                  </div>                 
-                  <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
-                <md-list-item class="md-3-line" >
-                  <div class="md-list-item-text">
-                    <h3>Max Term Allowed (months)</h3>
-                    <h5>{{user.maxTerm * 12 }}</h5>
+                    <md-divider ng-if="!$last"></md-divider>
                     
-                  </div>                 
-                  <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
-                <md-list-item class="md-3-line" >
-                  <div class="md-list-item-text">
-                    <h3>Total Income</h3>
-                    <h5>{{user.totalIncome | currency:'€' }}</h5>
-                    
-                  </div>                 
-                  <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
-              </md-list>
-            </md-content>
-            
-            
-           
-          </div>
+                    <span class="md-subhead">Available Income</span>
+                    <span class="md-headline">{{user.NDI | currency:'€' }}</span>
+                  
+               
+             
+                  </md-card-title-text>
+                </md-card-title>
+              </md-card>
+
+             
           </form>
       </div>
     </div>
