@@ -10,7 +10,7 @@ iframe {
     background: none
 }
 html {
-    background: #713F98;
+     background-image: url("../images/purple-bg.png");
     font-size: 100%;
     overflow-x: hidden;
     overflow-y: scroll
@@ -178,7 +178,7 @@ h6 {
 h1 {
     /*color: #4A2783;*/
     color: #f6f5ee;
-    font-size: 45px
+    font-size: 48pt
 }
 h2 {
     color: #A7C539;
@@ -4979,6 +4979,13 @@ dt {
         min-height: 600px;
         margin: auto!important
     }
+    #loanForm h1
+    {
+        font-size: 3.2em;
+      margin-bottom: 35px;
+    
+     
+    }
 }
 @media only screen and (max-width: 1100px) {
     .resourceblock {
@@ -4996,6 +5003,11 @@ md-input-container{
 
 
 /*CHILL MONEY*/
+
+.green{
+    /*color: #4A2783;*/
+    color: #a6c63c;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -5009,15 +5021,19 @@ input::-webkit-inner-spin-button {
 #loanForm h1
 {
   color:#f6f5ee;
-  font-size: 40pt;
+      font-size: 3.2em;
+  margin-bottom: 35px;
+  text-align: center;
  
 }
 #loanForm h4
 {
   color:#f6f5ee;
   font-family: "Helvetica Neue";
-  font-size: 18pt;
+  font-size: 1.2em;
   font-weight: normal;
+  text-align: center;
+  margin-bottom: 15px;
 }
 md-input-container .md-input.loanInput{
   font-family: ChunkFiveRegular;
@@ -5049,6 +5065,11 @@ md-input{
 md-input-container .md-input {
 
 }
+.md-chill-input{
+    margin-bottom: 14px;
+    margin-top: 26px;
+        width: 100%;
+}
 .md-chill-input .md-input{
     color: #8f8f8f;
     font-family: Helvetica Neue;
@@ -5057,6 +5078,7 @@ md-input-container .md-input {
     height: 34px;
     padding-top: 8px;
     width: 100%;
+
 }
 .chill-input-container{
       padding-left: 30px;
@@ -5077,7 +5099,7 @@ md-input-container .md-input {
   color: #442674;
   border: none;
   font-family: ChunkFiveRegular;
-  font-size: 48pt;
+  font-size: 3.2em;
   text-align: center;
   height: 76px;
   padding-top: 8px;
@@ -5159,6 +5181,9 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 md-content{
   /*width: 400px;*/
 }
+md-slider {
+    margin-bottom: 15px;
+}
 md-slider ._md-track-container {
     width: 100%;
     position: absolute;
@@ -5209,12 +5234,27 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   font-family: ChunkFiveRegular;
   color: #ffffff;
   height: 42px;
+  margin: 0px 0px; 
+  width: 100%;
+  padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
 }
 .md-chill-green-button{
   margin: 6px 0px 6px 8px;
   background-color: #a6c63c;
-  width: 280px;
-  font-size: 24pt;
+  min-width: 80%;
+  font-size: 20pt;
+    padding-top: 5px;
+}
+.btn-continue{
+    background-color: #a6c63c;
+    font-size: 20pt;
+    
+}
+.btn-back{
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 18pt;
 }
 .md-chill-purple-button{
   margin: 6px 8px 6px 0px;
@@ -5241,3 +5281,37 @@ md-tabs-canvas{
   color: #c60008; }
 .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
   margin-bottom: 0; }
+
+
+md-input-container .md-auto-hide .md-input-message-animation:not(.ng-animate) {
+    
+    padding-top: 1px;
+}
+
+@media only screen and (max-width: 400px) {
+    .blog-van-qq-body>#embedded>iframe {
+        min-width: 300px;
+        width: 100%;
+        min-height: 600px;
+        margin: auto!important
+    }
+    #loanForm h1
+    {
+        font-size: 2.2em;
+      margin-bottom: 15px; 
+    }
+    #loanForm h4 {
+    
+    font-size: 1.1em;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 15px;
+}
+    .btn-continue{
+    font-size: 14pt;
+    
+    }
+    .btn-back{
+        font-size: 12pt;
+    }
+}
