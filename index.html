@@ -40,6 +40,7 @@
     <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.js"></script>
 
     <script src="js/scripts.js"></script>
+    <script src="js/angulaUI-mask.js"></script>
   </head>
   <body >
 
@@ -70,7 +71,7 @@
             <h1>Personal Loans Made Simple<span class="green">.</span></h1>
           </div>
     <!-- first -->
-              <md-content class="md-padding" >
+              <md-content class="md-padding" style="width:100%>
                 <div layout="row" class="layoutForm" layout-align="center center" layout-wrap flex="33">
                   <div flex="100">
                     <h4 class="title-description">How much would you like to borrow?</h4>
@@ -83,7 +84,7 @@
                   <div flex="80">
                     <section class="" >
                       <md-input-container class="md-chill-loan-input" >
-                        <input id="userLoan"  ng-model="user.loan" format="number"  type="text" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
+                        <input id="userLoan"  ng-model="user.loan" format="number"  type="text" pattern="\d*" step="100" aria-controls="loan-slider" aria-label="slider" ><label for="userLoan" >{{user.loan | number }}</label>
                       </md-input-container>
                     </section> 
                   </div>
@@ -126,7 +127,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input md-block">                  
-                    <input required name="salary"  ng-model="user.salary" format="number"  type="text" min="1" step="0"  placeholder="Your Salary">
+                    <input required name="salary"  ng-model="user.salary" format="number"  type="text" pattern="\d*" min="1" step="0"  placeholder="Your Salary">
                      <div ng-messages="elsaForm.salary.$error">
                       <div ng-message="required">Your salary is required.</div>
                     </div>
@@ -186,7 +187,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input  md-block">
-                    <input ng-model="user.rent" format="number"  type="text" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
+                    <input ng-model="user.rent" format="number"  type="text" pattern="\d*" min="1" step="0"  placeholder="Monthly Rent / Mortage Payments" ng-required="true">
                   </md-input-container>
                 </div>
               </div>
@@ -198,7 +199,7 @@
               <div flex="90">
                 <div class="chill-input-container">
                   <md-input-container  class="md-chill-input md-block">
-                    <input ng-model="user.otherpayments" format="number"  type="text" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
+                    <input ng-model="user.otherpayments" format="number"  type="text" pattern="\d*" min="1" step="0"  placeholder="Other Monthly Loan Repayments" ng-required="true">
                   </md-input-container>
                 </div>
               </div>
@@ -248,7 +249,7 @@
                 <div flex="90">
                   <div class="chill-input-container">  
                     <md-input-container  class="md-chill-input md-block">
-                      <input ng-model="user.phone" type="text" placeholder="Phone Number" ng-required="true">
+                      <input ng-model="user.phone" type="text" placeholder="Phone Number" ui-mask="(999) 999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_" ng-required="true">
                     </md-input-container>
                   </div>
                 </div>

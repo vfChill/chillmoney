@@ -85,6 +85,8 @@
     }
 
     $scope.applyNow = function() {
+      console.log($scope.user.loan);
+      console.log($scope.user.loan.$viewValue);
       if($scope.user.loan < 1500 || $scope.user.loan > 60000){
 
         $scope.showAlert("","Please, select a new value","the range for loan aplication is between €1,500 to €60,000");
@@ -92,8 +94,11 @@
       }else{
         $scope.myForm = !$scope.myForm;
         $scope.myLoan = !$scope.myLoan;
+
         $scope.calculateTerms();
+
         console.log($scope.user); 
+        console.log($scope.user.loan.$viewValue); 
       }
       
     };
@@ -193,7 +198,7 @@
 
 
             ctrl.$parsers.unshift(function (viewValue) {
-                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, 0);
                 elem.val($filter(attrs.format)(plainNumber));
                 return plainNumber;
             });
