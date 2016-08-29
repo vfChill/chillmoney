@@ -198,7 +198,7 @@
 
 
             ctrl.$parsers.unshift(function (viewValue) {
-                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, 0);
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, "");
                 elem.val($filter(attrs.format)(plainNumber));
                 return plainNumber;
             });
